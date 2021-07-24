@@ -18,3 +18,10 @@ ARGS:
 ## Examples
 From stdin: `cat ./path/to/code.bf | brainfrick`\
 From path:  `brainfrick ./path/to/code.bf`
+
+## Compiling
+```
+git clone https://github.com/Gingeh/brainfrick.git
+cd ./brainfrick
+cargo build --release 
+```
