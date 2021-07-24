@@ -1,6 +1,5 @@
 use std::collections::VecDeque;
 
-#[derive(Debug)]
 pub struct BrainFuck {
     memory: Vec<Cell>,
     pointer: usize,
@@ -9,6 +8,7 @@ pub struct BrainFuck {
 }
 
 impl BrainFuck {
+    #[must_use]
     pub fn new(size: usize, input: &str) -> Self {
         BrainFuck {
             memory: vec![Cell::from(0); size],
@@ -93,7 +93,7 @@ impl BrainFuck {
     }
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq)]
+#[derive(PartialEq, Clone, Copy)]
 struct Cell {
     value: u8,
 }
