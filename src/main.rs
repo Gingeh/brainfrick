@@ -38,6 +38,9 @@ fn main() {
     let mut engine = BrainFuck::new(opt.size, &opt.input, 10000);
     match engine.run(&program) {
         Ok(res) => println!("{}", res),
-        Err(msg) => eprintln!("{}", msg),
+        Err(msg) => {
+            eprintln!("{}", msg);
+            process::exit(1)
+        },
     }
 }
