@@ -1,7 +1,6 @@
 use brainfrick::BrainFuck;
 use std::io::Read;
-use std::path::PathBuf;
-use std::{fs, io};
+use std::{fs, io, process, path};
 use structopt::StructOpt;
 
 #[derive(StructOpt)]
@@ -9,7 +8,7 @@ use structopt::StructOpt;
 struct Opt {
     /// Path to program [optional: will use stdin instead]
     #[structopt()]
-    path: Option<PathBuf>,
+    path: Option<path::PathBuf>,
 
     /// Input given to program
     #[structopt(short, long, default_value = "")]
