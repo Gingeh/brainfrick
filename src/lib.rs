@@ -146,13 +146,6 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_hello_world() {
-        let program = "--------[>+>+++++>-->-->++++>------<<<<<<-------]>.>---.>----..>-.>.>+++++++.<<.+++.<.<-.>>>+.";
-        let mut engine = BrainFuck::new(256, "", 10000);
-        assert_eq!(engine.run(program), Ok(String::from("Hello World!")));
-    }
-
-    #[test]
     fn test_input() {
         let program = ",++.,-.";
         let mut engine = BrainFuck::new(256, "a", 10000);
@@ -160,8 +153,36 @@ mod tests {
     }
     #[test]
     fn test_wraparound() {
-        let program = "->>.";
+        let program = "->>.<<.";
         let mut engine = BrainFuck::new(2, "", 10000);
+        assert_eq!(engine.run(program), Ok(String::from("ÿÿ")));
+    }
+    #[test]
+    fn test_max_steps() {
+        let program = "+[]";
+        let mut engine = BrainFuck::new(256, "", 100);
+        assert_eq!(engine.run(program), Err(String::from("Exceeded maximum steps (100), the program may be stuck in a loop.")));
+    }
+    #[test]
+    fn test_invalid_character() {
+        let program = "nothing lol";
+        let mut engine = BrainFuck::new(256, "", 10000);
+        assert_eq!(engine.run(program), Ok(String::new()));
+    }
+    #[test]
+    fn test_missing_bracket() {
+        let program = "[";
+        let mut engine = BrainFuck::new(256, "", 10000);
+        assert_eq!(engine.run(program), Err(String::from("A matching \"]\" could not be found.")));
+
+        let program = "+]";
+        let mut engine = BrainFuck::new(256, "", 10000);
+        assert_eq!(engine.run(program), Err(String::from("A matching \"[\" could not be found.")));
+    }
+    #[test]
+    fn test_loop() {
+        let program = "[[-.+]]++[-]-.";
+        let mut engine = BrainFuck::new(256, "", 10000);
         assert_eq!(engine.run(program), Ok(String::from("ÿ")));
     }
 }
