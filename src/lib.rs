@@ -161,7 +161,12 @@ mod tests {
     fn test_max_steps() {
         let program = "+[]";
         let mut engine = BrainFuck::new(256, "", 100);
-        assert_eq!(engine.run(program), Err(String::from("Exceeded maximum steps (100), the program may be stuck in a loop.")));
+        assert_eq!(
+            engine.run(program),
+            Err(String::from(
+                "Exceeded maximum steps (100), the program may be stuck in a loop."
+            ))
+        );
     }
     #[test]
     fn test_invalid_character() {
@@ -173,11 +178,17 @@ mod tests {
     fn test_missing_bracket() {
         let program = "[";
         let mut engine = BrainFuck::new(256, "", 10000);
-        assert_eq!(engine.run(program), Err(String::from("A matching \"]\" could not be found.")));
+        assert_eq!(
+            engine.run(program),
+            Err(String::from("A matching \"]\" could not be found."))
+        );
 
         let program = "+]";
         let mut engine = BrainFuck::new(256, "", 10000);
-        assert_eq!(engine.run(program), Err(String::from("A matching \"[\" could not be found.")));
+        assert_eq!(
+            engine.run(program),
+            Err(String::from("A matching \"[\" could not be found."))
+        );
     }
     #[test]
     fn test_loop() {

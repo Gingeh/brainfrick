@@ -1,6 +1,6 @@
 use brainfrick::BrainFuck;
 use std::io::Read;
-use std::{fs, io, process, path};
+use std::{fs, io, path, process};
 use structopt::StructOpt;
 
 #[derive(StructOpt)]
@@ -40,6 +40,6 @@ fn main() {
         Err(msg) => {
             eprintln!("{}", msg);
             process::exit(1)
-        },
+        }
     }
 }
